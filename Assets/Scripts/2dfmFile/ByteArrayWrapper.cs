@@ -18,10 +18,10 @@ namespace _2dfmFile
 
         public byte[] ReadBytes(int size)
         {
-            var bytes = new byte[size];
-            Array.Copy(this.bytes, offset, bytes, 0, size);
+            var read = new byte[size];
+            Array.Copy(this.bytes, offset, read, 0, size);
             this.offset += size;
-            return bytes;
+            return read;
         }
 
         public byte ReadByte()

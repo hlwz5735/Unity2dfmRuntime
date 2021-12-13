@@ -6,9 +6,13 @@ namespace Data
         public int Index { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public bool HasPrivatePalette { get; set; }
+
+        public PaletteData PrivatePalette;
         public int Size { get; set; }
         
+        public byte[] Bytes { get; set; }
+
+        public bool HasPrivatePalette => this.PrivatePalette != null;
         public bool Compressed => Size != 0;
         public int RealSize {
             get

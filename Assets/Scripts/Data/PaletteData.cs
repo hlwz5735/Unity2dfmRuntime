@@ -8,7 +8,7 @@ namespace Data
 
         public List<PaletteColor> Colors { get; set; }
         
-        private byte[] UnknownGap;
+        public byte[] UnknownGap;
 
         public PaletteData()
         {
@@ -37,6 +37,11 @@ namespace Data
     public class PaletteColor
     {
         public byte[] RawData { get; set; }
+
+        public PaletteColor()
+        {
+            this.RawData = new byte[4];
+        }
 
         public int IntValue =>
             RawData[0] << 24 +

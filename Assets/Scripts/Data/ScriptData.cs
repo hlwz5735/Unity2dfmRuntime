@@ -15,7 +15,7 @@ namespace Data
             this.Items = new List<ScriptItemData>();
         }
         
-        private byte UnknownFlag1;
-        private byte[] UnknownBytes;
+        public byte UnknownFlag1;
+        public byte[] UnknownBytes;
     }
 }
