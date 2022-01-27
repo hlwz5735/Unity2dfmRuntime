@@ -1,29 +1,39 @@
 using System;
 using System.Collections.Generic;
+using Attributes;
+using UnityEditor;
+using UnityEngine;
 
 namespace Data
 {
+    [Serializable]
     public class PlayerData
     {
-        public byte[] Signature { get; set; }
+        [HideInInspector]
+        public byte[] Signature;
         
-        public string Name { get; set; }
+        [CustomLabel("玩家名字")]
+        public string Name;
         
-        public int ScriptCount { get; set; }
-        public List<ScriptData> Scripts { get; set; }
-        
-        public int ScriptItemCount { get; set; }
-        public List<ScriptItemData> ScriptItems { get; set; }
-        
-        public int SpriteFrameCount { get; set; }
-        public List<SpriteFrameData> SpriteFrames { get; set; } 
-        
-        public PaletteData[] PublicPalettes { get; set; }
-        
-        public int SoundCount { get; set; }
-        public List<SoundData> Sounds { get; set; }
-        
-        public byte[] OriginalBytes { get; set; }
+        [CustomLabel("脚本总数")]
+        public int ScriptCount;
+        public List<ScriptData> Scripts;
+
+        [CustomLabel("脚本项总数")]
+        public int ScriptItemCount;
+        public List<ScriptItemData> ScriptItems;
+
+        [CustomLabel("精灵帧总数")]
+        public int SpriteFrameCount;
+        public List<SpriteFrameData> SpriteFrames;
+
+        public PaletteData[] PublicPalettes;
+
+        [CustomLabel("声音总数")]
+        public int SoundCount;
+        public List<SoundData> Sounds;
+
+        public byte[] OriginalBytes;
 
         public PlayerData()
         {
