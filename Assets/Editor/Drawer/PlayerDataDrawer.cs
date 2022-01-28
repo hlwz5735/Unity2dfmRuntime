@@ -38,7 +38,7 @@ namespace Editor.Drawer
             y += lineHeight;
             EditorGUI.PropertyField(getFieldRect(x, y, position.width), originalBytes);
             
-            EditorGUI.BeginDisabledGroup(true);
+            EditorGUI.EndDisabledGroup();
 
             EditorGUI.EndProperty();
         }
