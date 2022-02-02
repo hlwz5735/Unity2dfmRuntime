@@ -22,10 +22,13 @@ namespace Data
             color.RawData[0] = buffer[index + 2];
             color.RawData[1] = buffer[index + 1];
             color.RawData[2] = buffer[index];
-            if (this.IsPrivate)
+            if (color.RawData[0] + color.RawData[1] + color.RawData[2] == 0)
             {
-                color.RawData[3]
-                    = (byte) (color.RawData[0] + color.RawData[1] + color.RawData[2] == 0 ? 0 : 255);
+                color.RawData[3] = 0;
+            }
+            else if (this.IsPrivate)
+            {
+                color.RawData[3] = 255;
             }
             else
             {

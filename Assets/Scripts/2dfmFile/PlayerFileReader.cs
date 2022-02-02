@@ -30,6 +30,21 @@ namespace _2dfmFile
             ReadScriptTableData(wrapper, player);
             // 脚本项数据
             ReadScriptItemData(wrapper, player);
+            // 将格子信息分配给脚本
+            for (var i = 0; i < player.ScriptCount; i++)
+            {
+                var script = player.Scripts[i];
+                if (i < player.ScriptCount - 1)
+                {
+                    script.ItemCount = player.Scripts[i + 1].ItemBeginIndex - script.ItemBeginIndex;
+                }
+                else
+                {
+                    script.ItemCount = player.ScriptItemCount - script.ItemBeginIndex;
+                }
+
+                script.Items = player.ScriptItems.GetRange(script.ItemBeginIndex, script.ItemCount);
+            }
             // 精灵帧数据
             ReadSpriteFrameData(wrapper, player);
             // 公共调色盘数据
@@ -153,7 +168,6 @@ namespace _2dfmFile
             {
                 var sound = new SoundData();
                 sound.Offset = wrapper.Offset;
-                Debug.Log("Sound加载：" + sound.Offset);
                 var flagBytes = wrapper.ReadBytes(4);
                 sound.UnknownFlag = BitConverter.ToInt32(flagBytes, 0);
                 var nameBytes = wrapper.ReadBytes(32);

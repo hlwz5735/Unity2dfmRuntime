@@ -19,7 +19,7 @@ namespace Game
             this.spritePool = new List<Sprite>(playerData.SpriteFrameCount);
         }
 
-        public void LoadSpriteFrames()
+        public void Load()
         {
             for (int i = 0; i < this.PlayerData.SpriteFrameCount; i++)
             {
@@ -47,6 +47,10 @@ namespace Game
 
         public Sprite SpriteAt(int idx)
         {
+            if (idx < 0 || idx >= spritePool.Count)
+            {
+                return null;
+            }
             return this.spritePool[idx];
         }
     }
