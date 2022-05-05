@@ -17,7 +17,7 @@ public class PlayerPreview : MonoBehaviour
     private GamePlayer player;
 
     [SerializeField]
-    [CustomLabel("µ±Ç°Ö´ĞĞµÄ½Å±¾Ë÷Òı")]
+    [CustomLabel("å½“å‰æ‰§è¡Œçš„è„šæœ¬ç´¢å¼•")]
     private int runningScriptIdx = -1;
 
     private float timeWaiting = 0;
