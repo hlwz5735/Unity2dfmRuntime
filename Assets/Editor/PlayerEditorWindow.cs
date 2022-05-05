@@ -52,7 +52,7 @@ namespace Editor
             SpriteIdx = EditorGUILayout.IntField("精灵帧序号", SpriteIdx);
             SpriteIdx = Mathf.Clamp(SpriteIdx, 0, maxFrameIdx);
 
-            if (_target)
+            if (_target && _gamePlayer != null)
             {
                 var render = _target.GetComponent<SpriteRenderer>();
                 if (render)
