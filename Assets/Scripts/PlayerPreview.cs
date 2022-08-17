@@ -9,15 +9,15 @@ public class PlayerPreview : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
 
+    [CustomLabel("脚本表ID")]
     public int ScriptIdx = 0;
 
     private int lastScriptIdx = 0;
     
-    [SerializeField]
     private GamePlayer player;
 
     [SerializeField]
-    [CustomLabel("当前执行的脚本索引")]
+    [CustomLabel("脚本项的索引")]
     private int runningScriptIdx = -1;
 
     private float timeWaiting = 0;
@@ -31,9 +31,7 @@ public class PlayerPreview : MonoBehaviour
     {
         var playerFilePath = Application.streamingAssetsPath + "/Players/DONGDONG.player";
         var playerData = PlayerFileReader.Read2dfmPlayerFile(playerFilePath);
-        
         this.player = new GamePlayer(playerData);
-        
         this.player.Load();
     }
 
