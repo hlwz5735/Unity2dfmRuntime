@@ -45,7 +45,7 @@ namespace _2dfmFile
                     script.itemCount = player.scriptItemCount - script.itemBeginIndex;
                 }
 
-                script.items = player.scriptItems.GetRange(script.itemBeginIndex, script.itemCount);
+                script.items = player.scriptItems.GetRange(script.itemBeginIndex, script.itemCount).ToArray();
             }
             // 精灵帧数据
             readSpriteFrameData(wrapper, player);
@@ -69,11 +69,7 @@ namespace _2dfmFile
                 script.name = System.Text.Encoding.GetEncoding("GBK").GetString(nameBytes);
                 script.itemBeginIndex = BitConverter.ToUInt16(read, innerOffset + 32);
                 script.unknownFlag1 = read[innerOffset + 34];
-                script.isDefaultScript = read[innerOffset + 35] == 1;
-                var unknownBytes = new byte[3];
-                Array.Copy(read, innerOffset + 36, unknownBytes, 0, 3);
-                script.unknownBytes = unknownBytes;
-                
+                script.specialFlag = BitConverter.ToInt32(read, innerOffset + 35);
                 player.scripts.Add(script);
             }
         }

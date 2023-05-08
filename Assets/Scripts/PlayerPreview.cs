@@ -1,3 +1,4 @@
+using System;
 using _2dfmFile;
 using Attributes;
 using Data;
@@ -76,6 +77,13 @@ public class PlayerPreview : MonoBehaviour
             if (sprite != null)
             {
                 this.spriteRenderer.sprite = sprite;
+                this.spriteRenderer.flipX = item.flipX;
+                this.spriteRenderer.flipY = item.flipY;
+                var trans = this.spriteRenderer.GetComponent<Transform>();
+                trans.position = new Vector3(
+                    item.offset.x / 100f, 
+                    (-item.offset.y + (item.flipY ? sprite.rect.height : 0)) / 100f,
+                    trans.position.z);
             }
         }
         else
@@ -86,7 +94,7 @@ public class PlayerPreview : MonoBehaviour
 
     private bool hasNoFrameItem()
     {
-        return nowScript.items.TrueForAll(item => item.type != (int)ScriptItemTypes.AnimationFrame);
+        return Array.TrueForAll(nowScript.items, item => item.type != (int)ScriptItemTypes.AnimationFrame);
     }
 
     private AnimationFrameScript getNextFrameItem()

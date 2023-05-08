@@ -40,7 +40,7 @@ namespace SpriteFrame
             texture.Apply();
             
             var sprite = Sprite.Create(
-                texture, new Rect(PADDING, PADDING, data.width, data.height), new Vector2(0.5f, 0.5f), 100);
+                texture, new Rect(PADDING, PADDING, data.width, data.height), new Vector2(0.5f, 0), 100);
             return sprite;
         }
     }
