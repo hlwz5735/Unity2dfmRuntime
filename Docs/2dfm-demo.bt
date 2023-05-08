@@ -16,7 +16,7 @@
 //////////////////////// 开始 ///////////////////////////
 
 BYTE fileSignature[16] <name="文件头标记">;
-BYTE projectName[256]     <name="场景名">;
+BYTE projectName[256]     <name="DEMO名">;
 
 // 脚本表基本信息
 
@@ -36,8 +36,17 @@ struct {
 } frames <comment="精灵帧具体内容">;
 
 // 共享调色盘信息，一共8个共享调色盘
-Palettle palettles[8];
+
+Palettle palettles[8];
 
 int soundCount <name="声音总数", bgcolor=cRed>;
 
-struct {    SoundData sound[soundCount] <optimize=false>;} sounds <comment="声音具体信息">;
+struct {
+    SoundData sound[soundCount] <optimize=false>;
+} sounds <comment="声音具体信息">;
+
+int unknownGap1;
+short bgmSoundId <comment="背景音ID">;
+byte isSkipByAnyKey <comment="按任意键跳过">;
+short unknownGap2;
+unsigned int totalTime <comment="持续时间">;

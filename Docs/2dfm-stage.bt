@@ -16,7 +16,7 @@
 //////////////////////// 开始 ///////////////////////////
 
 BYTE fileSignature[16] <name="文件头标记">;
-BYTE projectName[256]     <name="场景名">;
+BYTE stageName[256]     <name="场景名">;
 
 // 脚本表基本信息
 
@@ -40,4 +40,7 @@ struct {
 
 int soundCount <name="声音总数", bgcolor=cRed>;
 
-struct {    SoundData sound[soundCount] <optimize=false>;} sounds <comment="声音具体信息">;
+struct {    SoundData sound[soundCount] <optimize=false>;} sounds <comment="声音具体信息">;
+
+int unknwnGap;
+int bgmSoundId <comment="BGM声音ID">;

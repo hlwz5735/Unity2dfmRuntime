@@ -2,10 +2,15 @@ typedef struct
 {
     CHAR  scriptName[32] <comment="脚本名", bgcolor=cGreen>;
     SHORT scriptIndex    <comment="脚本格子起始索引", bgcolor=0xFFAAAA>;
-    BYTE unknownFlags[5] <comment="未知内容", bgcolor=cRed>;
-    // BYTE  unknownFlag1;
-    // BYTE  isDefaultScript <comment="是否为缺省脚本", bgcolor=cRed>;
-    // BYTE  bytes[3]       <comment="未知", bgcolor=cRed>;
+    // BYTE unknownFlags[5] <comment="未知内容", bgcolor=cRed>;
+    BYTE  unknownFlag1;
+    /* 
+     * KGT中存在0x01、0x21、0x39、0x81等特殊值
+     * stage中0x03对应角色位置脚本项
+     * player中0x01对应的都是游戏默认动作项
+     * demo中，0x01对应基本背景，0x03对应系统图像位置
+     */
+    int  specialFlag <comment="特殊脚本项标记", bgcolor=cRed>;
 } SCRIPT <comment=GetScriptLineName>;
 
 char[] GetScriptLineName(SCRIPT &s)
