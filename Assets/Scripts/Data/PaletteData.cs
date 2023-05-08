@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Attributes;
 using UnityEngine;
 
 namespace Data
@@ -8,8 +9,14 @@ namespace Data
     /// </summary>
     public class PaletteData
     {
+        /// <summary>
+        /// 是否为私有色盘
+        /// </summary>
         public bool isPrivate { get; set; }
 
+        /// <summary>
+        /// 色盘颜色索引表
+        /// </summary>
         public List<PaletteColor> colors { get; set; }
 
         public byte[] unknownGap;
@@ -42,8 +49,14 @@ namespace Data
         }
     }
 
+    /// <summary>
+    /// 色盘颜色对象
+    /// </summary>
     public class PaletteColor
     {
+        /// <summary>
+        /// 原始字节数组数据
+        /// </summary>
         public byte[] rawData { get; set; }
 
         public PaletteColor()

@@ -21,7 +21,9 @@ namespace _2dfmFile
 
             var player = new PlayerData();
 
-            player.signature = wrapper.readBytes(16);
+            // player.signature = wrapper.readBytes(16);
+            // 跳过签名
+            wrapper.skip(16);
             
             var nameBytes = wrapper.readBytes(256);
             player.name = System.Text.Encoding.GetEncoding("GBK").GetString(nameBytes);
@@ -56,9 +58,9 @@ namespace _2dfmFile
 
         private static void readScriptTableData(ByteArrayWrapper wrapper, PlayerData player)
         {
-            player.scriptCount = wrapper.readInt();
-            var read = wrapper.readBytes(player.scriptCount * 39);
-            for (int i = 0; i < player.scriptCount; i++)
+            var scriptCount = wrapper.readInt();
+            var read = wrapper.readBytes(scriptCount * 39);
+            for (int i = 0; i < scriptCount; i++)
             {
                 var script = new ScriptData();
                 int innerOffset = i * 39;
@@ -78,9 +80,9 @@ namespace _2dfmFile
 
         private static void readScriptItemData(ByteArrayWrapper wrapper, PlayerData player)
         {
-            player.scriptItemCount = wrapper.readInt();
-            var read = wrapper.readBytes(player.scriptItemCount * 16);
-            for (int i = 0; i < player.scriptItemCount; i++)
+            var scriptItemCount = wrapper.readInt();
+            var read = wrapper.readBytes(scriptItemCount * 16);
+            for (int i = 0; i < scriptItemCount; i++)
             {
                 var scriptItem = new ScriptItemData();
 
@@ -96,8 +98,8 @@ namespace _2dfmFile
 
         private static void readSpriteFrameData(ByteArrayWrapper wrapper, PlayerData player)
         {
-            player.spriteFrameCount = wrapper.readInt();
-            for (int i = 0; i < player.spriteFrameCount; i++)
+            var spriteFrameCount = wrapper.readInt();
+            for (int i = 0; i < spriteFrameCount; i++)
             {
                 var frame = new SpriteFrameData();
                 frame.offset = wrapper.offset;
@@ -146,7 +148,7 @@ namespace _2dfmFile
                     }
                 }
                 
-                player.spriteFrames.Add(frame);
+                player.pictures.Add(frame);
             }
         }
 
@@ -163,8 +165,8 @@ namespace _2dfmFile
 
         private static void readSoundData(ByteArrayWrapper wrapper, PlayerData player)
         {
-            player.soundCount = wrapper.readInt();
-            for (int i = 0; i < player.soundCount; i++)
+            var soundCount = wrapper.readInt();
+            for (int i = 0; i < soundCount; i++)
             {
                 var sound = new SoundData();
                 sound.offset = wrapper.offset;

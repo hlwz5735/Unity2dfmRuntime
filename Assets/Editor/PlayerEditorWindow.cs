@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using _2dfmFile;
 using Data;
 using Game;
@@ -40,12 +41,12 @@ namespace Editor
                 EditorGUILayout.TextField("角色名", _playerData.name);
                 EditorGUILayout.IntField("脚本总数", _playerData.scriptCount);
                 EditorGUILayout.IntField("脚本项总数", _playerData.scriptItemCount);
-                EditorGUILayout.IntField("动画帧总数", _playerData.spriteFrameCount);
+                EditorGUILayout.IntField("图片总数", _playerData.pictureCount);
                 EditorGUILayout.IntField("声音总数", _playerData.soundCount);
                 EditorGUI.EndDisabledGroup();
                 EditorGUILayout.EndVertical();
 
-                maxFrameIdx = _playerData.spriteFrameCount - 1;
+                maxFrameIdx = _playerData.pictureCount - 1;
             }
 
             _target = (GameObject) EditorGUILayout.ObjectField("目标", _target, typeof(GameObject), true);
