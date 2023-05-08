@@ -8,11 +8,11 @@ namespace Game.ScriptItem
 {
     class ScriptHead : BaseScriptItem
     {
-        public int Level;
+        public int level;
 
         public ScriptHead(int level = 0) : base((int)ScriptItemTypes.ScriptHead)
         {
-            Level = level;
+            this.level = level;
         }
     }
 }

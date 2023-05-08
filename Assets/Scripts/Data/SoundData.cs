@@ -2,11 +2,11 @@ namespace Data
 {
     public class SoundData
     {
-        public int Offset { get; set; }
-        public int UnknownFlag { get; set; }
-        public string Name { get; set; }
-        public int Size { get; set; }
-        public byte[] Bytes { get; set; }
-        public short UnknownFlag2 { get; set; }
+        public int offset { get; set; }
+        public int unknownFlag { get; set; }
+        public string name { get; set; }
+        public int size { get; set; }
+        public byte[] bytes { get; set; }
+        public short unknownFlag2 { get; set; }
     }
 }

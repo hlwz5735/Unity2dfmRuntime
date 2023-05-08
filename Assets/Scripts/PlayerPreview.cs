@@ -4,55 +4,56 @@ using Data;
 using Game;
 using Game.ScriptItem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerPreview : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
 
     [CustomLabel("脚本表ID")]
-    public int ScriptIdx = 0;
+    public int scriptIdx = 0;
 
-    private int lastScriptIdx = 0;
+    private int _lastScriptIdx = 0;
     
-    private GamePlayer player;
+    private GamePlayer _player;
 
     [SerializeField]
     [CustomLabel("脚本项的索引")]
     private int runningScriptIdx = -1;
 
-    private float timeWaiting = 0;
+    private float _timeWaiting = 0;
 
     private ScriptData nowScript
     {
-        get => player.PlayerData.Scripts[this.ScriptIdx];
+        get => _player.playerData.scripts[this.scriptIdx];
     }
 
     private void Start()
     {
         var playerFilePath = Application.streamingAssetsPath + "/Players/DONGDONG.player";
-        var playerData = PlayerFileReader.Read2dfmPlayerFile(playerFilePath);
-        this.player = new GamePlayer(playerData);
-        this.player.Load();
+        var playerData = PlayerFileReader.read2dfmPlayerFile(playerFilePath);
+        this._player = new GamePlayer(playerData);
+        this._player.load();
     }
 
     public void Update()
     {
-        if (ScriptIdx != lastScriptIdx)
+        if (scriptIdx != _lastScriptIdx)
         {
             Reset();
-            this.lastScriptIdx = this.ScriptIdx;
+            this._lastScriptIdx = this.scriptIdx;
         }
-        if (this.spriteRenderer == null || this.player == null)
+        if (this.spriteRenderer == null || this._player == null)
         {
             return;
         }
 
-        if (this.ScriptIdx < 0 || this.ScriptIdx > player.PlayerData.Scripts.Count)
+        if (this.scriptIdx < 0 || this.scriptIdx > _player.playerData.scripts.Count)
         {
             return;
         }
 
-        if (float.IsInfinity(this.timeWaiting))
+        if (float.IsInfinity(this._timeWaiting))
         {
             return;
         }
@@ -61,7 +62,7 @@ public class PlayerPreview : MonoBehaviour
             return;
         }
 
-        if (this.timeWaiting <= 0)
+        if (this._timeWaiting <= 0)
         {
             this.runningScriptIdx += 1;
             var item = this.getNextFrameItem();
@@ -70,8 +71,8 @@ public class PlayerPreview : MonoBehaviour
                 return;
             }
 
-            this.timeWaiting = item.FreezeTime == 0 ? float.PositiveInfinity : item.FreezeTime / 100f;
-            var sprite = this.player.SpriteAt(item.PicIndex);
+            this._timeWaiting = item.freezeTime == 0 ? float.PositiveInfinity : item.freezeTime / 100f;
+            var sprite = this._player.spriteAt(item.picIndex);
             if (sprite != null)
             {
                 this.spriteRenderer.sprite = sprite;
@@ -79,45 +80,45 @@ public class PlayerPreview : MonoBehaviour
         }
         else
         {
-            this.timeWaiting -= Time.deltaTime;
+            this._timeWaiting -= Time.deltaTime;
         }
     }
 
     private bool hasNoFrameItem()
     {
-        return nowScript.Items.TrueForAll(item => item.Type != (int)ScriptItemTypes.AnimationFrame);
+        return nowScript.items.TrueForAll(item => item.type != (int)ScriptItemTypes.AnimationFrame);
     }
 
     private AnimationFrameScript getNextFrameItem()
     {
-        if (nowScript.ItemCount == 1)
+        if (nowScript.itemCount == 1)
         {
-            var theItem = nowScript.Items[0];
-            if (theItem.Type != (int)ScriptItemTypes.AnimationFrame)
+            var theItem = nowScript.items[0];
+            if (theItem.type != (int)ScriptItemTypes.AnimationFrame)
             {
                 return null;
             }
 
-            return AnimationFrameScriptTranslator.Instance.Decode(theItem.Parameters);
+            return AnimationFrameScriptTranslator.Instance.decode(theItem.parameters);
         }
 
-        if (this.runningScriptIdx < 0 || this.runningScriptIdx >= nowScript.ItemCount)
+        if (this.runningScriptIdx < 0 || this.runningScriptIdx >= nowScript.itemCount)
         {
             this.runningScriptIdx = 0;
         }
 
-        var nowItem = nowScript.Items[this.runningScriptIdx];
-        if (nowItem.Type != (int)ScriptItemTypes.AnimationFrame)
+        var nowItem = nowScript.items[this.runningScriptIdx];
+        if (nowItem.type != (int)ScriptItemTypes.AnimationFrame)
         {
             this.runningScriptIdx += 1;
             return this.getNextFrameItem();
         }
-        return AnimationFrameScriptTranslator.Instance.Decode(nowItem.Parameters);
+        return AnimationFrameScriptTranslator.Instance.decode(nowItem.parameters);
     }
 
     private void Reset()
     {
-        this.timeWaiting = 0;
+        this._timeWaiting = 0;
         this.runningScriptIdx = -1;
     }
 }

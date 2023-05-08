@@ -9,12 +9,12 @@ namespace Game.ScriptItem
 {
     class ScriptHeadTranslator : Singleton<ScriptHeadTranslator>, Translator<ScriptHead>
     {
-        public ScriptHead Decode(byte[] bytes)
+        public ScriptHead decode(byte[] bytes)
         {
             return new ScriptHead(bytes[1]);
         }
 
-        public byte[] Encode(ScriptHead item)
+        public byte[] encode(ScriptHead item)
         {
             // return new byte[0];
             throw new NotImplementedException();

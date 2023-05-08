@@ -7,7 +7,7 @@ namespace Editor.Drawer
     [CustomPropertyDrawer(typeof(PlayerData))]
     public class PlayerDataDrawer : PropertyDrawer
     {
-        private const int lineHeight = 22;
+        private const int LINE_HEIGHT = 22;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -24,18 +24,18 @@ namespace Editor.Drawer
             EditorGUI.BeginDisabledGroup(true);
 
             int x = 30;
-            int y = (int)(lineHeight + position.y);
+            int y = (int)(LINE_HEIGHT + position.y);
             
             EditorGUI.PropertyField(getFieldRect(x, y, position.width), name);
-            y += lineHeight;
+            y += LINE_HEIGHT;
             EditorGUI.PropertyField(getFieldRect(x, y, position.width), scriptCount);
-            y += lineHeight;
+            y += LINE_HEIGHT;
             EditorGUI.PropertyField(getFieldRect(x, y, position.width), scriptItemCount);
-            y += lineHeight;
+            y += LINE_HEIGHT;
             EditorGUI.PropertyField(getFieldRect(x, y, position.width), spriteFrameCount);
-            y += lineHeight;
+            y += LINE_HEIGHT;
             EditorGUI.PropertyField(getFieldRect(x, y, position.width), soundCount);
-            y += lineHeight;
+            y += LINE_HEIGHT;
             EditorGUI.PropertyField(getFieldRect(x, y, position.width), originalBytes);
             
             EditorGUI.EndDisabledGroup();
@@ -50,7 +50,7 @@ namespace Editor.Drawer
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return lineHeight * 10;
+            return LINE_HEIGHT * 10;
         }
     }
 }

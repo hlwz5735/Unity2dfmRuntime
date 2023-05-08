@@ -8,7 +8,7 @@ namespace Game.ScriptItem
 {
     interface Translator<T> where T : BaseScriptItem
     {
-        public T Decode(byte[] bytes);
-        public byte[] Encode(T item);
+        public T decode(byte[] bytes);
+        public byte[] encode(T item);
     }
 }

@@ -4,6 +4,7 @@ using Data;
 using Game;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Editor
 {
@@ -17,7 +18,7 @@ namespace Editor
 
         private GameObject _target;
 
-        public int SpriteIdx = 0;
+        public int spriteIdx = 0;
         
         private void OnGUI()
         {
@@ -27,7 +28,7 @@ namespace Editor
             {
                 if (_playerAsset)
                 {
-                    ReadPlayerAsset();
+                    readPlayerAsset();
                 }
             }
 
@@ -36,28 +37,28 @@ namespace Editor
             {
                 EditorGUILayout.BeginVertical();
                 EditorGUI.BeginDisabledGroup(true);
-                EditorGUILayout.TextField("角色名", _playerData.Name);
-                EditorGUILayout.IntField("脚本总数", _playerData.ScriptCount);
-                EditorGUILayout.IntField("脚本项总数", _playerData.ScriptItemCount);
-                EditorGUILayout.IntField("动画帧总数", _playerData.SpriteFrameCount);
-                EditorGUILayout.IntField("声音总数", _playerData.SoundCount);
+                EditorGUILayout.TextField("角色名", _playerData.name);
+                EditorGUILayout.IntField("脚本总数", _playerData.scriptCount);
+                EditorGUILayout.IntField("脚本项总数", _playerData.scriptItemCount);
+                EditorGUILayout.IntField("动画帧总数", _playerData.spriteFrameCount);
+                EditorGUILayout.IntField("声音总数", _playerData.soundCount);
                 EditorGUI.EndDisabledGroup();
                 EditorGUILayout.EndVertical();
 
-                maxFrameIdx = _playerData.SpriteFrameCount - 1;
+                maxFrameIdx = _playerData.spriteFrameCount - 1;
             }
 
             _target = (GameObject) EditorGUILayout.ObjectField("目标", _target, typeof(GameObject), true);
 
-            SpriteIdx = EditorGUILayout.IntField("精灵帧序号", SpriteIdx);
-            SpriteIdx = Mathf.Clamp(SpriteIdx, 0, maxFrameIdx);
+            spriteIdx = EditorGUILayout.IntField("精灵帧序号", spriteIdx);
+            spriteIdx = Mathf.Clamp(spriteIdx, 0, maxFrameIdx);
 
             if (_target && _gamePlayer != null)
             {
                 var render = _target.GetComponent<SpriteRenderer>();
                 if (render)
                 {
-                    var sprite = _gamePlayer.SpriteAt(SpriteIdx);
+                    var sprite = _gamePlayer.spriteAt(spriteIdx);
                     if (render.sprite != sprite)
                     {
                         render.sprite = sprite;
@@ -66,16 +67,16 @@ namespace Editor
             }
         }
 
-        private void ReadPlayerAsset()
+        private void readPlayerAsset()
         {
             var playerFilePath = Application.streamingAssetsPath + "/Players/" + _playerAsset.name + ".player";
-            _playerData = PlayerFileReader.Read2dfmPlayerFile(playerFilePath);
+            _playerData = PlayerFileReader.read2dfmPlayerFile(playerFilePath);
             _gamePlayer = new GamePlayer(_playerData);
-            _gamePlayer.Load();
+            _gamePlayer.load();
         }
 
         [MenuItem("2DFM/角色编辑器")]
-        private static void OpenWindow()
+        private static void openWindow()
         {
             var window = GetWindow(typeof(PlayerEditorWindow), true, "角色编辑器");
             window.Show();

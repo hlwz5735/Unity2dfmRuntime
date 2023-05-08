@@ -12,33 +12,32 @@ namespace Game.ScriptItem
         /// <summary>
         /// 停留时间
         /// </summary>
-        public int FreezeTime = 0;
+        public int freezeTime = 0;
 
         /// <summary>
         /// 图号
         /// </summary>
-        public int PicIndex = 0;
+        public int picIndex = 0;
 
         /// <summary>
         /// 偏移量
         /// </summary>
-        public Vector2 Offset = Vector2.zero;
+        public Vector2 offset = Vector2.zero;
 
         /// <summary>
         /// 是否X轴反转
         /// </summary>
-        public bool FlipX = false;
+        public bool flipX = false;
 
         /// <summary>
         /// 是否Y轴反转
         /// </summary>
-        public bool FlipY = false;
+        public bool flipY = false;
 
         /// <summary>
         /// 是否固定朝向
         /// </summary>
-        public bool FixDir = false;
-
+        public bool fixDir = false;
 
         public AnimationFrameScript() : base((int)ScriptItemTypes.AnimationFrame)
         {

@@ -4,55 +4,54 @@ namespace _2dfmFile
 {
     public class ByteArrayWrapper
     {
-        private byte[] bytes;
-        private int offset;
+        public readonly byte[] bytes;
+        private int _offset;
 
-        public byte[] Bytes => bytes;
-        public int Offset => offset;
+        public int offset => _offset;
 
         public ByteArrayWrapper(byte[] bytes)
         {
             this.bytes = bytes;
-            this.offset = 0;
+            this._offset = 0;
         }
 
-        public byte[] ReadBytes(int size)
+        public byte[] readBytes(int size)
         {
             var read = new byte[size];
-            Array.Copy(this.bytes, offset, read, 0, size);
-            this.offset += size;
+            Array.Copy(this.bytes, _offset, read, 0, size);
+            this._offset += size;
             return read;
         }
 
-        public byte ReadByte()
+        public byte readByte()
         {
-            byte val = bytes[offset];
-            offset += 1;
+            byte val = bytes[_offset];
+            _offset += 1;
             return val;
         }
 
-        public short ReadShort()
+        public short readShort()
         {
-            short val = BitConverter.ToInt16(bytes, offset);
-            this.offset += 2;
+            short val = BitConverter.ToInt16(bytes, _offset);
+            this._offset += 2;
             return val;
         }
 
-        public int ReadInt()
+        public int readInt()
         {
-            int val = BitConverter.ToInt32(bytes, offset);
-            this.offset += 4;
+            int val = BitConverter.ToInt32(bytes, _offset);
+            this._offset += 4;
             return val;
         }
         
-        public void Skip(int size)
+        public void skip(int size)
         {
-            this.offset += size;
+            this._offset += size;
         }
 
-        public void SetOffset(int val)
+        public void setOffset(int val)
         {
-            this.offset = val;
+            this._offset = val;
         }
     }
 }

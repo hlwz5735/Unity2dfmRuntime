@@ -2,7 +2,7 @@ namespace Data
 {
     public class ScriptItemData
     {
-        public int Type { get; set; }
-        public byte[] Parameters { get; set; }
+        public int type { get; set; }
+        public byte[] parameters { get; set; }
     }
 }

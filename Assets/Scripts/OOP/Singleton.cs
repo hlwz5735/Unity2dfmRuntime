@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace OOP
 {
     public abstract class Singleton<T> where T : Singleton<T>, new()
     {
-        private static T _Instance = null;
+        private static readonly T INSTANCE = null;
 
         protected Singleton()
         {
@@ -16,13 +11,10 @@ namespace OOP
 
         static Singleton()
         {
-            _Instance = new T();
+            INSTANCE = new T();
         }
 
         //private static object _SyncObj = new object();
-        public static T Instance
-        {
-            get { return _Instance; }
-        }
+        public static T Instance => INSTANCE;
     }
 }

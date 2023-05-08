@@ -2,32 +2,32 @@ namespace Data
 {
     public class SpriteFrameData
     {
-        public int Offset { get; set; }
-        public int Index { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public int offset { get; set; }
+        public int index { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
 
-        public PaletteData PrivatePalette;
-        public int Size { get; set; }
+        public PaletteData privatePalette;
+        public int size { get; set; }
         
-        public byte[] Bytes { get; set; }
+        public byte[] bytes { get; set; }
 
-        public bool HasPrivatePalette => this.PrivatePalette != null;
-        public bool Compressed => Size != 0;
-        public int RealSize {
+        public bool hasPrivatePalette => this.privatePalette != null;
+        public bool compressed => size != 0;
+        public int realSize {
             get
             {
-                var size = 0;
-                if (this.HasPrivatePalette)
+                var s = 0;
+                if (this.hasPrivatePalette)
                 {
-                    size += 1024;
+                    s += 1024;
                 }
 
-                size += Width * Height;
-                return size;   
+                s += width * height;
+                return s;   
             }
         }
 
-        public int UnknownFlag1;
+        public int unknownFlag1;
     }
 }

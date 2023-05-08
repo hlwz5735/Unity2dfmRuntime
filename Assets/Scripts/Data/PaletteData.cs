@@ -3,67 +3,70 @@ using UnityEngine;
 
 namespace Data
 {
+    /// <summary>
+    /// 色盘数据信息
+    /// </summary>
     public class PaletteData
     {
-        public bool IsPrivate { get; set; }
+        public bool isPrivate { get; set; }
 
-        public List<PaletteColor> Colors { get; set; }
+        public List<PaletteColor> colors { get; set; }
 
-        public byte[] UnknownGap;
+        public byte[] unknownGap;
 
         public PaletteData()
         {
-            this.Colors = new List<PaletteColor>(256);
+            this.colors = new List<PaletteColor>(256);
         }
 
-        public void PushBgra(byte[] buffer, int index = 0)
+        public void pushBgra(byte[] buffer, int index = 0)
         {
             var color = new PaletteColor();
-            color.RawData[0] = buffer[index + 2];
-            color.RawData[1] = buffer[index + 1];
-            color.RawData[2] = buffer[index];
-            if (color.RawData[0] + color.RawData[1] + color.RawData[2] == 0)
+            color.rawData[0] = buffer[index + 2];
+            color.rawData[1] = buffer[index + 1];
+            color.rawData[2] = buffer[index];
+            if (color.rawData[0] + color.rawData[1] + color.rawData[2] == 0)
             {
-                color.RawData[3] = 0;
+                color.rawData[3] = 0;
             }
-            else if (this.IsPrivate)
+            else if (this.isPrivate)
             {
-                color.RawData[3] = 255;
+                color.rawData[3] = 255;
             }
             else
             {
-                color.RawData[3] = (byte) (buffer[index + 3] == 0 ? 0 : 255);
+                color.rawData[3] = (byte) (buffer[index + 3] == 0 ? 0 : 255);
             }
 
-            this.Colors.Add(color);
+            this.colors.Add(color);
         }
     }
 
     public class PaletteColor
     {
-        public byte[] RawData { get; set; }
+        public byte[] rawData { get; set; }
 
         public PaletteColor()
         {
-            this.RawData = new byte[4];
+            this.rawData = new byte[4];
         }
 
-        public int IntValue =>
-            (RawData[0] << 24)
-            | (RawData[1] << 16)
-            | (RawData[2] << 8)
-            | RawData[0];
+        public int intValue =>
+            (rawData[0] << 24)
+            | (rawData[1] << 16)
+            | (rawData[2] << 8)
+            | rawData[0];
 
-        public byte Red => RawData[0];
-        public byte Green => RawData[1];
-        public byte Blue => RawData[2];
-        public byte Alpha => RawData[3];
+        public byte red => rawData[0];
+        public byte green => rawData[1];
+        public byte blue => rawData[2];
+        public byte alpha => rawData[3];
 
-        public string HexValue
+        public string hexValue
         {
             get
             {
-                var hexStr = this.IntValue.ToString("X");
+                var hexStr = this.intValue.ToString("X");
                 if (hexStr.Length < 7)
                 {
                     return "0x0" + hexStr;
@@ -75,13 +78,13 @@ namespace Data
 
         public string rgbaValue
         {
-            get { return $"rgba({RawData[0]}, {RawData[1]}, {RawData[2]}, {RawData[3] / 255.0})"; }
+            get { return $"rgba({rawData[0]}, {rawData[1]}, {rawData[2]}, {rawData[3] / 255.0})"; }
         }
 
         public static implicit operator Color(PaletteColor pc) => new Color(
-            pc.Red / 255f, pc.Green / 255f, pc.Blue / 255f, pc.Alpha / 255f
+            pc.red / 255f, pc.green / 255f, pc.blue / 255f, pc.alpha / 255f
         );
 
-        public static implicit operator int(PaletteColor pc) => pc.IntValue;
+        public static implicit operator int(PaletteColor pc) => pc.intValue;
     }
 }

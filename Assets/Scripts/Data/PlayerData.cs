@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Attributes;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Data
 {
@@ -10,39 +11,49 @@ namespace Data
     public class PlayerData
     {
         [HideInInspector]
-        public byte[] Signature;
+        public byte[] signature;
         
         [CustomLabel("玩家名字")]
-        public string Name;
+        public string name;
         
         [CustomLabel("脚本总数")]
-        public int ScriptCount;
-        public List<ScriptData> Scripts;
+        public int scriptCount;
+        
+        [HideInInspector]
+        public List<ScriptData> scripts;
 
         [CustomLabel("脚本项总数")]
-        public int ScriptItemCount;
-        public List<ScriptItemData> ScriptItems;
+        public int scriptItemCount;
 
-        [CustomLabel("精灵帧总数")]
-        public int SpriteFrameCount;
-        public List<SpriteFrameData> SpriteFrames;
+        [HideInInspector]
+        public List<ScriptItemData> scriptItems;
 
-        public PaletteData[] PublicPalettes;
+        [CustomLabel("图片总数")]
+        public int spriteFrameCount;
+        
+        [HideInInspector]
+        public List<SpriteFrameData> spriteFrames;
+
+        [CustomLabel("公共色盘列表")]
+        public PaletteData[] publicPalettes;
 
         [CustomLabel("声音总数")]
-        public int SoundCount;
-        public List<SoundData> Sounds;
+        public int soundCount;
+        
+        [HideInInspector]
+        public List<SoundData> sounds;
 
-        public byte[] OriginalBytes;
+        [HideInInspector]
+        public byte[] originalBytes;
 
         public PlayerData()
         {
-            this.PublicPalettes = new PaletteData[8];
+            this.publicPalettes = new PaletteData[8];
             
-            this.Scripts = new List<ScriptData>();
-            this.ScriptItems = new List<ScriptItemData>();
-            this.SpriteFrames = new List<SpriteFrameData>();
-            this.Sounds = new List<SoundData>();
+            this.scripts = new List<ScriptData>();
+            this.scriptItems = new List<ScriptItemData>();
+            this.spriteFrames = new List<SpriteFrameData>();
+            this.sounds = new List<SoundData>();
         }
     }
 }

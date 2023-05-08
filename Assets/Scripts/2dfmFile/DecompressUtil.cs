@@ -5,7 +5,7 @@ namespace _2dfmFile
 {
     public static class DecompressUtil
     {
-        public static byte[] Decompress(byte[] original, int destSize)
+        public static byte[] decompress(byte[] original, int destSize)
         {
             if (destSize <= 0)
             {

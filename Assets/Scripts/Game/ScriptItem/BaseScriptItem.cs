@@ -8,11 +8,11 @@ namespace Game.ScriptItem
 {
     abstract class BaseScriptItem
     {
-        public int Type;
+        public int type;
 
         protected BaseScriptItem(int type)
         {
-            this.Type = type;
+            this.type = type;
         }
     }
 }

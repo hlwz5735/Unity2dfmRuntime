@@ -4,11 +4,11 @@ namespace Attributes
 {
     public class CustomLabelAttribute : PropertyAttribute
     {
-        public string Name { get; }
+        public string name { get; }
 
         public CustomLabelAttribute(string name)
         {
-            Name = name;
+            this.name = name;
         }
     }
 }

@@ -10,48 +10,48 @@ namespace Game
     [Serializable]
     public class GamePlayer
     {
-        public readonly PlayerData PlayerData;
-        private List<Sprite> spritePool;
+        public readonly PlayerData playerData;
+        private List<Sprite> _spritePool;
 
         public GamePlayer(PlayerData playerData)
         {
-            this.PlayerData = playerData;
-            this.spritePool = new List<Sprite>(playerData.SpriteFrameCount);
+            this.playerData = playerData;
+            this._spritePool = new List<Sprite>(playerData.spriteFrameCount);
         }
 
-        public void Load()
+        public void load()
         {
-            for (int i = 0; i < this.PlayerData.SpriteFrameCount; i++)
+            for (int i = 0; i < this.playerData.spriteFrameCount; i++)
             {
-                LoadSpriteFrame(i);
+                loadSpriteFrame(i);
             }
         }
         
-        public void LoadSpriteFrame(int idx)
+        public void loadSpriteFrame(int idx)
         {
-            if (idx < 0 || idx >= this.PlayerData.SpriteFrameCount)
+            if (idx < 0 || idx >= this.playerData.spriteFrameCount)
             {
                 return;
             }
-            var spriteFrame = PlayerData.SpriteFrames[idx];
+            var spriteFrame = playerData.spriteFrames[idx];
             PaletteData palette = null;
-            if (!spriteFrame.HasPrivatePalette)
+            if (!spriteFrame.hasPrivatePalette)
             {
-                palette = PlayerData.PublicPalettes[0];
+                palette = playerData.publicPalettes[0];
             }
 
-            var sprite = SpriteFrameUtil.GenSprite(spriteFrame, palette);
-            sprite.name = this.PlayerData.Name + "_" + idx;
-            this.spritePool.Add(sprite);
+            var sprite = SpriteFrameUtil.genSprite(spriteFrame, palette);
+            sprite.name = this.playerData.name + "_" + idx;
+            this._spritePool.Add(sprite);
         }
 
-        public Sprite SpriteAt(int idx)
+        public Sprite spriteAt(int idx)
         {
-            if (idx < 0 || idx >= spritePool.Count)
+            if (idx < 0 || idx >= _spritePool.Count)
             {
                 return null;
             }
-            return this.spritePool[idx];
+            return this._spritePool[idx];
         }
     }
 }
