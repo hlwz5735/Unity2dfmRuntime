@@ -1,0 +1,43 @@
+//------------------------------------------------
+//--- 010 Editor v12.0.1 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//   Purpose: 
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+#include "common.h"
+
+//////////////////////// 开始 ///////////////////////////
+
+BYTE fileSignature[16] <name="文件头标记">;
+BYTE projectName[256]     <name="场景名">;
+
+// 脚本表基本信息
+
+int scriptCount        <name="脚本总数", bgcolor=cGreen>;
+SCRIPT scripts[scriptCount] <name="脚本索引表", bgcolor=0xF0F0F0>;
+
+// 脚本格子基本信息
+
+int scriptItemCount <name="脚本格子总数", bgcolor=cRed>;
+SCRIPT_ITEM scriptItems[scriptItemCount] <name="脚本项表">;
+
+// 精灵帧总数
+
+int frameCount <name="精灵帧总数">;
+struct {
+    SPRITE_FRAME frame[frameCount] <optimize=false>;
+} frames <comment="精灵帧具体内容">;
+
+// 共享调色盘信息，一共8个共享调色盘
+Palettle palettles[8];
+
+int soundCount <name="声音总数", bgcolor=cRed>;
+
+struct {    SoundData sound[soundCount] <optimize=false>;} sounds <comment="声音具体信息">;
