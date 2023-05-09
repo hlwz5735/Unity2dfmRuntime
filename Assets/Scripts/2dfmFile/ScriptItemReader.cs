@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OOP;
+using Data.ScriptItem;
 using UnityEngine;
 
-namespace Game.ScriptItem
+namespace _2dfmFile
 {
-    class AnimationFrameScriptTranslator : Singleton<AnimationFrameScriptTranslator>, Translator<AnimationFrameScript>
+    public static class ScriptItemReader
     {
-        public AnimationFrameScript decode(byte[] bytes)
-        {
-            var item = new AnimationFrameScript
+        public static PlayerScriptHead readPlayerScriptHead(byte[] bytes) {
+            return new PlayerScriptHead(bytes[1]);
+        }
+
+        public static PlayerShowPicture readPlayerShowPicture(byte[] bytes) {
+            var item = new PlayerShowPicture
             {
                 freezeTime = BitConverter.ToUInt16(bytes, 0),
                 picIndex = BitConverter.ToUInt16(new byte[] { bytes[2], (byte)(bytes[3] & 0b00111111) }, 0),
@@ -23,12 +22,6 @@ namespace Game.ScriptItem
             };
 
             return item;
-        }
-
-        public byte[] encode(AnimationFrameScript item)
-        {
-            // return new byte[0];
-            throw new NotImplementedException();
         }
     }
 }

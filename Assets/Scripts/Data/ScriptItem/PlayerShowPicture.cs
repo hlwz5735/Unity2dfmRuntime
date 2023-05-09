@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game.ScriptItem
+namespace Data.ScriptItem
 {
-    class AnimationFrameScript : BaseScriptItem
+    public class PlayerShowPicture : BaseScriptItem
     {
         /// <summary>
         /// 停留时间
@@ -39,7 +34,7 @@ namespace Game.ScriptItem
         /// </summary>
         public bool fixDir = false;
 
-        public AnimationFrameScript() : base((int)ScriptItemTypes.AnimationFrame)
+        public PlayerShowPicture() : base((int)ScriptItemTypes.AnimationFrame)
         {
 
         }

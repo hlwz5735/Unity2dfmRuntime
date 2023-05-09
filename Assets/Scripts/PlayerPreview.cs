@@ -2,8 +2,8 @@ using System;
 using _2dfmFile;
 using Attributes;
 using Data;
+using Data.ScriptItem;
 using Game;
-using Game.ScriptItem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -97,7 +97,7 @@ public class PlayerPreview : MonoBehaviour
         return Array.TrueForAll(nowScript.items, item => item.type != (int)ScriptItemTypes.AnimationFrame);
     }
 
-    private AnimationFrameScript getNextFrameItem()
+    private PlayerShowPicture getNextFrameItem()
     {
         if (nowScript.itemCount == 1)
         {
@@ -107,7 +107,7 @@ public class PlayerPreview : MonoBehaviour
                 return null;
             }
 
-            return AnimationFrameScriptTranslator.Instance.decode(theItem.parameters);
+            return ScriptItemReader.readPlayerShowPicture(theItem.parameters);
         }
 
         if (this.runningScriptIdx < 0 || this.runningScriptIdx >= nowScript.itemCount)
@@ -121,7 +121,7 @@ public class PlayerPreview : MonoBehaviour
             this.runningScriptIdx += 1;
             return this.getNextFrameItem();
         }
-        return AnimationFrameScriptTranslator.Instance.decode(nowItem.parameters);
+        return ScriptItemReader.readPlayerShowPicture(nowItem.parameters);
     }
 
     private void Reset()

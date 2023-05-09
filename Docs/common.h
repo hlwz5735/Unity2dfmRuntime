@@ -20,8 +20,8 @@ char[] GetScriptLineName(SCRIPT &s)
 
 typedef struct
 {
-    SHORT scriptType <bgcolor=cGreen>;
-    BYTE bytes[14] <fgcolor=0x00AA00>;
+    BYTE scriptType <bgcolor=cGreen>;
+    BYTE bytes[15] <fgcolor=0x00AA00>;
 } SCRIPT_ITEM <comment="脚本项">;
 
 typedef struct {
