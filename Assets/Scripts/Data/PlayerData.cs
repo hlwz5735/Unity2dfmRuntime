@@ -14,19 +14,19 @@ namespace Data
         public string name;
 
         [CustomLabel("脚本索引项")]
-        public List<ScriptData> scripts;
+        public List<ScriptData> scripts = new();
 
         [CustomLabel("脚本项")]
-        public List<ScriptItemData> scriptItems;
+        public List<ScriptItemData> scriptItems = new();
 
         [CustomLabel("图片列表")]
-        public List<SpriteFrameData> pictures;
+        public List<SpriteFrameData> pictures = new();
 
         [CustomLabel("公共色盘列表")]
-        public PaletteData[] publicPalettes;
+        public PaletteData[] publicPalettes = new PaletteData[8];
 
         [CustomLabel("声音列表")]
-        public List<SoundData> sounds;
+        public List<SoundData> sounds = new();
 
         // TODO: 尚未解析的部分
         // public List<StoryData> stories;
@@ -41,15 +41,5 @@ namespace Data
         public int scriptItemCount => scriptItems?.Count ?? 0;
         public int pictureCount => pictures?.Count ?? 0;
         public int soundCount => sounds?.Count ?? 0;
-
-        public PlayerData()
-        {
-            this.publicPalettes = new PaletteData[8];
-            
-            this.scripts = new List<ScriptData>();
-            this.scriptItems = new List<ScriptItemData>();
-            this.pictures = new List<SpriteFrameData>();
-            this.sounds = new List<SoundData>();
-        }
     }
 }

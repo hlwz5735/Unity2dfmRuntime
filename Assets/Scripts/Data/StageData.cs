@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 
 namespace Data {
-    public class StageData {
+    public class StageData
+    {
+        public string name;
         public int width;
         public int height;
         
@@ -11,6 +13,6 @@ namespace Data {
         public List<PaletteData> commonPalettes;
         public List<SoundData> sounds;
 
-        // public BgmSetting bgmSetting;
+        public int bgmId;
     }
 }
