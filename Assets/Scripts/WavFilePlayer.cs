@@ -26,10 +26,7 @@ public class WavFilePlayer : MonoBehaviour
     {
         int idx = Math.Min(this.playerData.soundCount - 1, Math.Max(0, this.soundNo));
         var wavBytes = playerData.sounds[idx].bytes;
-        var wav = new WaveFile(wavBytes);
-        AudioClip audioClip = AudioClip.Create("testSound", wav.SampleCount, 1, wav.Frequency, false);
-        audioClip.SetData(wav.LeftChannel, 0);
-        return audioClip;
+        return WavUtility.ToAudioClip(wavBytes);
     }
 
     public void playAudio()
@@ -37,8 +34,7 @@ public class WavFilePlayer : MonoBehaviour
         var clip = this.getAudioClip();
         if (clip != null)
         {
-            audioSource.clip = clip;
-            this.audioSource.Play();
+            audioSource.PlayOneShot(clip);
         }
     }
 }

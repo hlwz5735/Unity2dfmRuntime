@@ -29,6 +29,24 @@ namespace Audio
         public int SampleCount { get; internal set; }
         public int Frequency { get; internal set; }
 
+        public float[] Data
+        {
+            get
+            {
+                if (ChannelCount == 1)
+                {
+                    return LeftChannel;
+                }
+                var data = new float[SampleCount * 2];
+                for (int i = 0; i < SampleCount; i++)
+                {
+                    data[i * 2] = LeftChannel[i];
+                    data[i * 2 + 1] = RightChannel[i];
+                }
+                return data;
+            }
+        }
+
         public WaveFile(byte[] wav)
         {
             // Determine if mono or stereo
