@@ -34,7 +34,7 @@ namespace Data.ScriptItem
         /// </summary>
         public bool fixDir = false;
 
-        public PlayerShowPicture() : base((int)ScriptItemTypes.AnimationFrame)
+        public PlayerShowPicture() : base((int)PlayerScriptItemTypes.AnimationFrame)
         {
 
         }

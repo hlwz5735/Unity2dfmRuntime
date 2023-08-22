@@ -4,7 +4,7 @@
     {
         public int level;
 
-        public PlayerScriptHead(int level = 0) : base((int)ScriptItemTypes.ScriptHead)
+        public PlayerScriptHead(int level = 0) : base((int)PlayerScriptItemTypes.ScriptHead)
         {
             this.level = level;
         }

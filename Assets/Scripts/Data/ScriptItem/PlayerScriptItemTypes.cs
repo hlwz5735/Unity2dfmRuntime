@@ -1,6 +1,6 @@
 ﻿namespace Data.ScriptItem
 {
-    public enum ScriptItemTypes
+    public enum PlayerScriptItemTypes
     {
         /** 脚本头 */
         ScriptHead = 0x0,
@@ -22,5 +22,17 @@
         ColorChanging = 0x23,
         /** 残影效果 */
         StickingEffect = 0x25
+    }
+
+    public enum StageScriptItemTypes
+    {
+        /** 场景脚本头项 */
+        ScriptHead = 0x0,
+        /** 播放声音 */
+        Sound = 0x3,
+        /** 动画帧显示 */
+        AnimationFrame = 0xC,
+        /** 变量分歧 */
+        Variable = 0x1F,
     }
 }

@@ -6,16 +6,18 @@ using Data;
 using SpriteFrame;
 using UnityEngine;
 
-namespace Game {
+namespace Game.Stage {
     public class GameStage : MonoBehaviour {
         private StageData _stageData;
         private Sprite[] _spritePool;
         private AudioClip[] _soundPool;
 
-        public AudioSource bgmPlayer;
+        private AudioSource _bgmPlayer;
+        
         public string stageName;
+        public GameObject stageEntityPrefab;
 
-        private List<GameStageEntity> _entities = new List<GameStageEntity>();
+        private List<GameObject> _entities = new();
 
         public void setStageData(StageData data)
         {
@@ -33,13 +35,28 @@ namespace Game {
             var filePath = Application.streamingAssetsPath + "/Stages/" + stageName + ".stage";
             var data = StageFileReader.read2dfmStageFile(filePath);
             this.setStageData(data);
-            
-            bgmPlayer = GetComponent<AudioSource>();
+
+            for (var index = 1; index < _stageData.scripts.Count - 1; index++)
+            {
+                var script = _stageData.scripts[index];
+                var entity = Instantiate(stageEntityPrefab, transform);
+                var entityComponent = entity.GetComponent<GameStageEntity>();
+                var spriteRenderer = entity.GetComponent<SpriteRenderer>();
+                spriteRenderer.sortingOrder = index;
+                entity.name = script.name;
+                entityComponent.stage = this;
+                entityComponent.name = script.name;
+                entityComponent.scriptItems = new List<ScriptItemData>(script.items);
+
+                _entities.Add(entity);
+            }
+
+            _bgmPlayer = GetComponent<AudioSource>();
             // 播放BGM
             var clip = soundAt(_stageData.bgmId);
-            bgmPlayer.clip = clip;
-            bgmPlayer.loop = true;
-            bgmPlayer.Play();
+            _bgmPlayer.clip = clip;
+            _bgmPlayer.loop = true;
+            _bgmPlayer.Play();
         }
      
         public void loadSpriteFrame(int idx)

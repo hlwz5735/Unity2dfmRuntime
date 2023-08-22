@@ -80,7 +80,7 @@ public class PlayerPreview : MonoBehaviour
                 this.spriteRenderer.flipX = item.flipX;
                 this.spriteRenderer.flipY = item.flipY;
                 var trans = this.spriteRenderer.GetComponent<Transform>();
-                trans.position = new Vector3(
+                trans.localPosition = new Vector3(
                     item.offset.x / 100f, 
                     (-item.offset.y + (item.flipY ? sprite.rect.height : 0)) / 100f,
                     trans.position.z);
@@ -94,7 +94,7 @@ public class PlayerPreview : MonoBehaviour
 
     private bool hasNoFrameItem()
     {
-        return Array.TrueForAll(nowScript.items, item => item.type != (int)ScriptItemTypes.AnimationFrame);
+        return Array.TrueForAll(nowScript.items, item => item.type != (int)PlayerScriptItemTypes.AnimationFrame);
     }
 
     private PlayerShowPicture getNextFrameItem()
@@ -102,7 +102,7 @@ public class PlayerPreview : MonoBehaviour
         if (nowScript.itemCount == 1)
         {
             var theItem = nowScript.items[0];
-            if (theItem.type != (int)ScriptItemTypes.AnimationFrame)
+            if (theItem.type != (int)PlayerScriptItemTypes.AnimationFrame)
             {
                 return null;
             }
@@ -116,7 +116,7 @@ public class PlayerPreview : MonoBehaviour
         }
 
         var nowItem = nowScript.items[this.runningScriptIdx];
-        if (nowItem.type != (int)ScriptItemTypes.AnimationFrame)
+        if (nowItem.type != (int)PlayerScriptItemTypes.AnimationFrame)
         {
             this.runningScriptIdx += 1;
             return this.getNextFrameItem();
