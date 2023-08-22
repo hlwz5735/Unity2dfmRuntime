@@ -100,12 +100,12 @@ namespace Audio
 
             float[] data = new float[wavSize];
 
-            sbyte maxValue = sbyte.MaxValue;
+            var centerVal = sbyte.MaxValue;
 
             int i = 0;
             while (i < wavSize)
             {
-                data[i] = (float)source[i] / maxValue;
+                data[i] = (source[i] - centerVal) / 128.0F;
                 ++i;
             }
 
@@ -157,8 +157,8 @@ namespace Audio
 
             float[] data = new float[convertedSize];
 
-            byte[]
-                block = new byte[sizeof(int)]; // using a 4 byte block for copying 3 bytes, then copy bytes with 1 offset
+            // using a 4 byte block for copying 3 bytes, then copy bytes with 1 offset
+            byte[]block = new byte[sizeof(int)]; 
 
             int offset = 0;
             int i = 0;
