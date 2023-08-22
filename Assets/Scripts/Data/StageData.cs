@@ -4,8 +4,6 @@ namespace Data {
     public class StageData
     {
         public string name;
-        public int width;
-        public int height;
         
         public List<ScriptData> scripts;
         public List<ScriptItemData> scriptItems;
